@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
 import { ItemCount } from "../ItemCount/ItemCount";
 import styles from "./itemDetail.module.css";
+import { CartContext } from "../../CartContext/CartContext";
 
-export const ItemDetail = ({ name, category, price, pictureUrl, stock }) => {
+export const ItemDetail = ({
+  id,
+  name,
+  category,
+  price,
+  pictureUrl,
+  stock,
+}) => {
   const [quantityAdded, setQuantityAdded] = useState(0);
+
+  const { addItem } = useContext(CartContext);
 
   const handleOnAdd = (quantity) => {
     setQuantityAdded(quantity);
+
+    const item = {
+      id,
+      name,
+      price,
+    };
+
+    addItem(item, quantity);
   };
 
   return (
@@ -34,9 +54,20 @@ export const ItemDetail = ({ name, category, price, pictureUrl, stock }) => {
       </div>
       <div>
         {quantityAdded > 0 ? (
-          <button className={styles.ButtonsItemDetail}>Terminar</button>
+          <div className={styles.boxButtonItemDetail}>
+            <Link to="/cart">
+              <Button bg="#8cacd9" color="#14253d">
+                Terminar
+              </Button>
+            </Link>
+            <Link to="/">
+              <Button bg="#8cacd9" color="#14253d">
+                Volver
+              </Button>
+            </Link>
+          </div>
         ) : (
-          <ItemCount stock={stock} onAdd={handleOnAdd} />
+          <ItemCount stock={stock} initial={1} onAdd={handleOnAdd} />
         )}
       </div>
     </div>

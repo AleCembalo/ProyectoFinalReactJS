@@ -18,7 +18,8 @@ font-family: 'Dancing Script', cursive; */
 .button {
   background-color: hsl(217, 54%, 11%);
   color: #8cacd9;
-  padding: 10px 5px;
+  padding: 10px 20px;
+  margin: 0px 10px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(235, 225, 225, 0.15);
 }

@@ -22,7 +22,7 @@ export const ItemDetailContainer = () => {
   return (
     <>
       {isLoading ? (
-        <h2 style={{ color: "#8cacd9" }}> Cargando producto... </h2>
+        <h2 style={{ color: "#8cacd9", marginTop: "50px"}}> Cargando producto... </h2>
       ) : (
         <div className="d-flex justify-content-center">
           <ItemDetail {...product} />

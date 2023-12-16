@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Button } from "@chakra-ui/react";
 import styles from "./ItemCount.module.css";
 
-export const ItemCount = ({ stock, initial = 1, onAdd }) => {
+export const ItemCount = ({ stock, initial, onAdd }) => {
   const [quantity, setQuantity] = useState(initial);
 
   const increment = () => {
@@ -23,20 +24,17 @@ export const ItemCount = ({ stock, initial = 1, onAdd }) => {
         <h2>Pack de semillas x 3</h2>
         <div className={styles.ButtonsItemCount}>
           <div className={styles.NumberItemCount}>
-            <button className={styles.buttonItemCount} onClick={increment}>
+            <Button bg="#8cacd9" color="#14253d" onClick={increment}>
               +
-            </button>
+            </Button>
             <h3>{quantity}</h3>
-            <button className={styles.buttonItemCount} onClick={decrement}>
+            <Button bg="#8cacd9" color="#14253d" onClick={decrement}>
               -
-            </button>
+            </Button>
           </div>
-          <button
-            className={styles.buttonItemCount}
-            onClick={() => onAdd(quantity)}
-          >
+          <Button bg="#8cacd9" color="#14253d" onClick={() => onAdd(quantity)}>
             Agregar al carrito
-          </button>
+          </Button>
         </div>
       </div>
     </>
