@@ -1,4 +1,9 @@
-import { Cart, ItemDetailContainer, ItemListContainer, NavBar } from "./Components";
+import {
+  Cart,
+  ItemDetailContainer,
+  ItemListContainer,
+  NavBar,
+} from "./Components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartContextProvider } from "./CartContext/CartContext";
 
@@ -13,7 +18,7 @@ export const App = () => {
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
-      </CartContextProvider>      
+      </CartContextProvider>
     </BrowserRouter>
   );
 };

@@ -4,18 +4,29 @@ export const CartContext = createContext(null);
 
 export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [totalCartItems, setTotalCartItems] = useState(0);
+  const [totalCart, setTotalCart] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   const addItem = (item, quantity) => {
     console.log(item, quantity);
-    
-    const newItem = {
-      ...item,
-      quantity,
-    };
+    const { id, name, price } = item;
+    const index = cart.findIndex((product) => product.id === id);
 
-    setCart([...cart, newItem]);
+    if (index !== -1) {
+      const cartCopy = [...cart];
+      cartCopy[index].quantity += quantity;
+      cartCopy[index].subTotal = cartCopy[index].quantity * cartCopy[index].price;
+      setCart(cartCopy);
+    } else {
+      const newItem = {
+        id,
+        name,
+        price,
+        quantity,
+        subTotal: quantity * price,
+      };
+      setCart([...cart, newItem]);
+    }
   };
 
   const removeItem = (id) => {
@@ -24,27 +35,27 @@ export const CartContextProvider = ({ children }) => {
   };
 
   const clearCart = () => {
-    setCart ([])
-  }
+    setCart([]);
+  };
 
   const handleTotal = () => {
-    const total = cart.reduce( (acum, item) => acum + item.subTotal, 0 );
-    setTotalCartItems(total);
-}
+    const totalCart = cart.reduce((acum, item) => acum + item.subTotal, 0);
+    setTotalCart(totalCart);
+  };
 
-const handleTotalQuantity = () => { 
-    const total = cart.reduce( (acum, item) => acum + item.quantity, 0);
-    setTotalQuantity(total);
-}
+  const handleTotalQuantity = () => {
+    const totalQuantity = cart.reduce((acum, item) => acum + item.quantity, 0);
+    setTotalQuantity(totalQuantity);
+  };
 
-useEffect( () => { 
-  handleTotal();
-  handleTotalQuantity();
-}, [cart] )
+  useEffect(() => {
+    handleTotal();
+    handleTotalQuantity();
+  }, [cart]);
 
   const objectValue = {
     cart,
-    totalCartItems,
+    totalCart,
     totalQuantity,
     addItem,
     removeItem,
@@ -52,9 +63,6 @@ useEffect( () => {
   };
 
   return (
-    <CartContext.Provider value={objectValue}>
-      {" "}
-      {children}{" "}
-    </CartContext.Provider>
+    <CartContext.Provider value={objectValue}>{children}</CartContext.Provider>
   );
 };

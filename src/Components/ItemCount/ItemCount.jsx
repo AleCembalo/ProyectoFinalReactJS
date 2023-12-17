@@ -32,8 +32,11 @@ export const ItemCount = ({ stock, initial, onAdd }) => {
               -
             </Button>
           </div>
-          <Button bg="#8cacd9" color="#14253d" onClick={() => onAdd(quantity)}>
+          <Button mt="5px" mb="10px" bg="#8cacd9" color="#14253d" onClick={() => onAdd(quantity)}>
             Agregar al carrito
+          </Button>
+          <Button ml="5px" bg="#8cacd9" color="#14253d">
+            Volver a Inicio
           </Button>
         </div>
       </div>

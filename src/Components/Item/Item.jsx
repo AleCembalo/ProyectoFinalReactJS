@@ -10,7 +10,7 @@ export const Item = ({ id, name, pictureUrl, price }) => {
         <h4 className={styles.textCard}>{name}</h4>
         <p className={styles.textCard}>Precio: ${price}</p>
         <Link to={`/item/${id}`}>
-          <Button bg='#8cacd9' color='#14253d'>
+          <Button bg="#8cacd9" color="#14253d">
             Detalle
           </Button>
         </Link>
