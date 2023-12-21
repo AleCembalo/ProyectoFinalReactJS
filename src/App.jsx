@@ -5,7 +5,7 @@ import {
   NavBar,
 } from "./Components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CartContextProvider } from "./CartContext/CartContext";
+import { CartContextProvider } from "./Context/CartContext";
 
 export const App = () => {
   return (

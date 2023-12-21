@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import styles from "./ItemCount.module.css";
 
@@ -32,12 +33,14 @@ export const ItemCount = ({ stock, initial, onAdd }) => {
               -
             </Button>
           </div>
-          <Button mt="5px" mb="10px" bg="#8cacd9" color="#14253d" onClick={() => onAdd(quantity)}>
+          <Button mt="5px" mb="10px" bg="#8cacd9" color="#14253d" onClick={() => onAdd(quantity)} >
             Agregar al carrito
           </Button>
-          <Button ml="5px" bg="#8cacd9" color="#14253d">
-            Volver a Inicio
-          </Button>
+          <Link to="/">
+            <Button ml="5px" bg="#8cacd9" color="#14253d">
+              Volver a Inicio
+            </Button>
+          </Link>
         </div>
       </div>
     </>

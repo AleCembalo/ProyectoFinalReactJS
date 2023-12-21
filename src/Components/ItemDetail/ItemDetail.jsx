@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import { ItemCount } from "../ItemCount/ItemCount";
 import styles from "./itemDetail.module.css";
-import { CartContext } from "../../CartContext/CartContext";
+import { CartContext } from "../../Context/CartContext";
 
 export const ItemDetail = ({
   id,
@@ -57,12 +57,12 @@ export const ItemDetail = ({
           <div className={styles.boxButtonItemDetail}>
             <Link to="/cart">
               <Button bg="#8cacd9" color="#14253d">
-                Terminar
+                Terminar <br /> Compra
               </Button>
             </Link>
             <Link to="/">
               <Button bg="#8cacd9" color="#14253d">
-                Volver
+                Seguir <br /> Comprando
               </Button>
             </Link>
           </div>

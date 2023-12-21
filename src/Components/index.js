@@ -7,4 +7,5 @@ export * from './ItemDetailContainer/ItemDetailContainer';
 export * from './ItemList/ItemList';
 export * from './ItemListContainer/ItemListContainer';
 export * from './Navbar/NavBar';
+export * from './Order/Order';
 export * from './index';

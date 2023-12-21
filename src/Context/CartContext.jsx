@@ -32,10 +32,12 @@ export const CartContextProvider = ({ children }) => {
   const removeItem = (id) => {
     const itemsFilter = cart.filter((item) => item.id !== id);
     setCart(itemsFilter);
+    handleTotal;
   };
 
   const clearCart = () => {
     setCart([]);
+    handleTotal;
   };
 
   const handleTotal = () => {
@@ -47,6 +49,17 @@ export const CartContextProvider = ({ children }) => {
     const totalQuantity = cart.reduce((acum, item) => acum + item.quantity, 0);
     setTotalQuantity(totalQuantity);
   };
+
+  const addOrderDB = (cartProducts, userData, total) => { 
+    const newOrder = {
+      buyer: userData,
+      items: cartProducts,
+      data: serverTimestamp(),
+      total
+    }
+    console.log(newOrder)
+    addDoc( collection(db, "orders"), newOrder );
+  }
 
   useEffect(() => {
     handleTotal();
@@ -60,6 +73,7 @@ export const CartContextProvider = ({ children }) => {
     addItem,
     removeItem,
     clearCart,
+    addOrderDB,
   };
 
   return (

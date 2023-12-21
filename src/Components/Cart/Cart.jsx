@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../../CartContext/CartContext";
+import { CartContext } from "../../Context/CartContext";
 import { Card, Text, CardBody, CardFooter, Box, Button } from "@chakra-ui/react";
 import { DeleteIcon} from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
@@ -33,13 +33,14 @@ export const Cart = () => {
       <Text fontSize='50px' py={10} color={"#8cacd9"}>
         CARRITO
       </Text>
-      <Box boxSize="sm">
+      <Box boxSize="xs">
         {cart.map((item) => (
           <Card
             key={item.id}
             bgColor={"#0f344844"}
             color={"#8cacd9"}
             border={"2px"}
+            marginBottom={10}
           >
             <CardBody>
               <Text fontWeight="bold">Nombre: {item.name}</Text>
@@ -47,7 +48,7 @@ export const Cart = () => {
               <Text fontWeight="bold">Cantidad: {item.quantity}</Text>
               <Text fontWeight="bold">SubTotal: {item.subTotal}</Text>
             </CardBody>
-            <CardFooter>
+            <CardFooter display="flex" alignItems="center" justifyContent="center">
               <Button bg="#8cacd9" onClick={() => removeItem(item.id)} ><DeleteIcon /></Button>
             </CardFooter>
           </Card>

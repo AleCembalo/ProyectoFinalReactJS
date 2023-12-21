@@ -17,13 +17,13 @@ export const NavBar = () => {
           <Link to="/">
             <button className={styles.button}>Todas</button>
           </Link>
-          <Link to="/category/sativa">
+          <Link to="/category/Sativa">
             <button className={styles.button}>Sativas</button>
           </Link>
-          <Link to="/category/hibrida">
+          <Link to="/category/Hibrida">
             <button className={styles.button}>Híbridas</button>
           </Link>
-          <Link to="/category/indica">
+          <Link to={"/category/Indica"}>
             <button className={styles.button}>Indicas</button>
           </Link>
         </div>
