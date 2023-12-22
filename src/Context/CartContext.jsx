@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext(null);
 
@@ -8,14 +10,14 @@ export const CartContextProvider = ({ children }) => {
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   const addItem = (item, quantity) => {
-    console.log(item, quantity);
     const { id, name, price } = item;
     const index = cart.findIndex((product) => product.id === id);
 
     if (index !== -1) {
       const cartCopy = [...cart];
       cartCopy[index].quantity += quantity;
-      cartCopy[index].subTotal = cartCopy[index].quantity * cartCopy[index].price;
+      cartCopy[index].subTotal =
+        cartCopy[index].quantity * cartCopy[index].price;
       setCart(cartCopy);
     } else {
       const newItem = {
@@ -27,6 +29,17 @@ export const CartContextProvider = ({ children }) => {
       };
       setCart([...cart, newItem]);
     }
+  };
+
+  const addOrderDB = (cartProducts, userData, total) => {
+    const newOrder = {
+      buyer: userData,
+      items: cartProducts,
+      data: serverTimestamp(),
+      total,
+    };
+    console.log(newOrder);
+    addDoc(collection(db, "orders"), newOrder);
   };
 
   const removeItem = (id) => {
@@ -49,17 +62,6 @@ export const CartContextProvider = ({ children }) => {
     const totalQuantity = cart.reduce((acum, item) => acum + item.quantity, 0);
     setTotalQuantity(totalQuantity);
   };
-
-  const addOrderDB = (cartProducts, userData, total) => { 
-    const newOrder = {
-      buyer: userData,
-      items: cartProducts,
-      data: serverTimestamp(),
-      total
-    }
-    console.log(newOrder)
-    addDoc( collection(db, "orders"), newOrder );
-  }
 
   useEffect(() => {
     handleTotal();

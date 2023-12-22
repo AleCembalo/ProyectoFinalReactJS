@@ -57,9 +57,11 @@ export const Cart = () => {
         <Button ml="10px" bg="#8cacd9" color="#14253d" onClick={() => clearCart()}>
         Vaciar Carrito
         </Button>
+        <Link to="/Order">
         <Button ml="10px" bg="#8cacd9" color="#14253d">
         Terminar Compra
         </Button>
+        </Link>
       </Box>
     </Box>
     </>
