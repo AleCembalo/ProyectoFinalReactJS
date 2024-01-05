@@ -4,6 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { ItemCount } from "../ItemCount/ItemCount";
 import styles from "./itemDetail.module.css";
 import { CartContext } from "../../Context/CartContext";
+import Swal from "sweetalert2";
 
 export const ItemDetail = ({
   id,
@@ -25,6 +26,18 @@ export const ItemDetail = ({
       name,
       price,
     };
+
+    Swal.fire({
+      position: 'bottom-end',
+      icon: 'success',
+      iconColor: '#3085d6',
+      color: '#3085d6',
+      background:'#2f415b',
+      toast: true,
+      title: `${item.name}, agregado al carrito!`,
+      showConfirmButton: false,
+      timer: 1500
+  })
 
     addItem(item, quantity);
   };

@@ -1,5 +1,5 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../config/firebaseConfig";
+import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
+// import { db } from "../config/firebaseConfig";
 import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext(null);
@@ -8,6 +8,8 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [orderId, setOrderId] = useState("");
+
 
   const addItem = (item, quantity) => {
     const { id, name, price } = item;
@@ -31,15 +33,17 @@ export const CartContextProvider = ({ children }) => {
     }
   };
 
-  const addOrderDB = (cartProducts, userData, total) => {
+  const addOrderDB = async(cartProducts, userData, total) => {
     const newOrder = {
       buyer: userData,
       items: cartProducts,
       data: serverTimestamp(),
       total,
     };
-    console.log(newOrder);
-    addDoc(collection(db, "orders"), newOrder);
+
+    const db = getFirestore();
+    const refOrder = await addDoc(collection(db, "orders"), newOrder);
+    setOrderId(refOrder.id);
   };
 
   const removeItem = (id) => {
@@ -72,6 +76,7 @@ export const CartContextProvider = ({ children }) => {
     cart,
     totalCart,
     totalQuantity,
+    orderId,
     addItem,
     removeItem,
     clearCart,
