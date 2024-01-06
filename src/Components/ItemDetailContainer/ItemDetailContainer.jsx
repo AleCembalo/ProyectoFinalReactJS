@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../../config/firebaseConfig";
+import { db } from "../../Config/firebaseConfig";
 import { ItemDetail } from "../ItemDetail/ItemDetail";
 
 export const ItemDetailContainer = () => {
@@ -9,25 +9,24 @@ export const ItemDetailContainer = () => {
 
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
-  const getProductById = (id) => { 
-    const productRef = doc( db, "products", id );
-      getDoc(productRef)
-        .then( resp => {
-          if( resp.exists()) {
-            const prod = {
-              id: resp.id,
-              ...resp.data()
-            }
-            setProduct(prod);
-          }
-        })    
-}
 
-useEffect(() => {
-  setIsLoading(false);
-  getProductById(id);
-}, []);
+  const getProductById = (id) => {
+    const productRef = doc(db, "products", id);
+    getDoc(productRef).then((resp) => {
+      if (resp.exists()) {
+        const prod = {
+          id: resp.id,
+          ...resp.data(),
+        };
+        setProduct(prod);
+      }
+    });
+  };
+
+  useEffect(() => {
+    setIsLoading(false);
+    getProductById(id);
+  }, []);
 
   return (
     <>
