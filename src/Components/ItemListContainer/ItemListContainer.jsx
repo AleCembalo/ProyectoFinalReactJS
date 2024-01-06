@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { db } from "../../config/firebaseConfig";
+import { db } from "../../Config/firebaseConfig";
 import { ItemList } from "../ItemList/ItemList";
 
 export const ItemListContainer = () => {
